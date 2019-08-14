@@ -1,6 +1,5 @@
 fsroot = node['jenkins_swarm']['parameters']['fsroot'].to_s
 service_user = node['jenkins_swarm']['client']['service_user'].to_s
-jenkins_keys = data_bag_item('jenkins', 'keys')
 
 
 directory "#{fsroot}/.ssh" do
@@ -17,6 +16,7 @@ cookbook_file "#{fsroot}/.ssh/config" do
 end
 
 if node['jenkins_swarm']['client']['service_user_ssh_keys']
+  jenkins_keys = data_bag_item('jenkins', 'keys')
   node.run_state['private_key'] = jenkins_keys[service_user]['private'].to_s
   node.run_state['public_key'] = jenkins_keys[service_user]['public'].to_s
 
