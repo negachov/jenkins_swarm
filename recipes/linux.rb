@@ -50,7 +50,7 @@ end
 
 template '/etc/systemd/system/swarm.service' do
   source 'swarm.service.erb'
-  mode 0755
+  mode 0644
   notifies :run, 'bash[reload_daemons]', :immediate
 end
 
